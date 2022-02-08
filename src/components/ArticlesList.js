@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { getArticles } from "../utils/api";
 
-import Article from "./ArticleItem";
+import ArticleItem from "./ArticleItem";
 
 export default function ArticlesList() {
     const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,7 @@ export default function ArticlesList() {
             setArticles(articles);
             setIsLoading(false);
         });
-    }, []); 
+    }, [isLoading]); 
 
     // TODO Add spinner component and add to pages
     if (isLoading) return <h2>Loading...</h2>;
@@ -25,7 +25,7 @@ export default function ArticlesList() {
         <section id='article-list'>
             <h2>Articles</h2>
             {articles.map( article => 
-                <Article key={article.article_id} article={article}></Article>
+                <ArticleItem key={article.article_id} article={article}></ArticleItem>
             )}
         </section>
     );
