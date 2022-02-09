@@ -7,6 +7,7 @@ export default function Article({ article }) {
       <p>{article.body}</p>
       <ul>
         <li><Link to={`/articles/${article.article_id}`}>Detail</Link></li>
+        <li><Link to={`/articles/${article.article_id}/reviews`}>Reviews</Link></li>
       </ul>
     </section>
   );

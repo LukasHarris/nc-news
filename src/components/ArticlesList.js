@@ -22,7 +22,7 @@ export default function ArticlesList() {
     if (articles.length === 0) return <h2>No Articles Found</h2>
 
     return (
-        <section id='article-list'>
+        <section id='articles-list'>
             <h2>Articles</h2>
             {articles.map( article => 
                 <ArticleItem key={article.article_id} article={article}></ArticleItem>
