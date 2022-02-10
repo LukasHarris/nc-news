@@ -9,6 +9,7 @@ import HomePage from "./HomePage";
 import ArticlesList from "./components/ArticlesList";
 import ArticleDetail from "./components/ArticleDetail";
 import ReviewsList from "./components/ReviewsList";
+import AuthorsList from "./components/AuthorsList";
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
           <Route path="/articles" element={<ArticlesList />}></Route>
           <Route path="/articles/:article_id" element={<ArticleDetail />} />
           <Route path="/articles/:article_id/reviews" element={<ReviewsList />} />
-          {/* <Route path="/articles/:article_id/comments/:comment_id" element={<Reviews />} />
-          <Route path="/users" element={<UsersList />}></Route> */}
+          {/* <Route path="/articles/:article_id/comments/:comment_id" element={<Reviews />} />*/}
+          <Route path="/authors" element={<AuthorsList />}></Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

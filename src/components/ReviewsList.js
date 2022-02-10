@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { getReviews } from "../utils/api";
 
-import ArticleItem from "./ArticleItem";
-
+import ReviewItem from '../components/ReviewItem';
 
 export default function ReviewsList() {
   const { article_id } = useParams();
@@ -22,16 +21,9 @@ export default function ReviewsList() {
   if (isLoading) return <h2>Loading...</h2>;
   if (reviews.length === 0) return <h2>No Reviews Found</h2>
 
- /* {
-    "comment_id": 169,
-    "votes": 6,
-    "created_at": "2020-09-19T17:11:00.000Z",
-    "author": "happyamy2016",
-    "body": "Adipisci numquam eum maiores veniam qui praesentium. Veniam atque neque dolores. Voluptates doloremque eos corrupti. Vero minima nesciunt reprehenderit et eius unde a unde iusto. Architecto praesentium eum impedit. Ipsa officia ut ea sint autem nulla."
-}*/
   return (
       <section id='reviews-list'>
           <h2>Reviews</h2>
-          {reviews.map( review => <div key={review.comment_id}>{review.votes}{review.author}{review.created_at}{review.body}</div>)}
+          {reviews.map( review => <ReviewItem key={review.comment_id} review={review} />)}
       </section>);
 }

@@ -4,6 +4,15 @@ const newsAPI = axios.create({
   baseURL: "https://be-lh-news.herokuapp.com/api",
 });
 
+/*** Topics Endpoint */
+export function getTopics() {
+  return newsAPI
+    .get("/topics")
+    .then( response => {
+      return response.data.topics;
+    });
+}
+
 /*** Articles Endpoint */
 export function getArticles() {
   return newsAPI
@@ -28,4 +37,19 @@ export function getReviews(article_id) {
     .then( response => {
       return response.data.comments;
     });
+}
+
+/*** Authors Endpoint */
+export function getAuthors() {
+  // TODO Implement users endpoint within API
+  const authors = {};
+  return getArticles().then( articles => {
+    return articles;
+  })
+  .then( articles => {
+    articles.forEach( article => {
+      authors[article.author] = article.author;
+    });
+    return Object.keys(authors);
+  })
 }

@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 
-import { getArticles } from "../utils/api";
+import { getTopics, getArticles } from "../utils/api";
 
 import ArticleItem from "./ArticleItem";
+import TopicsDropDown from "./TopicsDropDown";
 
 export default function ArticlesList() {
     const [isLoading, setIsLoading] = useState(true);
+    const [topics, setTopics] = useState([]);
+    const [currentTopics, setCurrentTopics] = useState('all');
     const [articles, setArticles] = useState([]);
 
-    //TODO Topics??
+    useEffect(()=> {
+        getTopics().then( topics => {
+            setTopics(topics.map( topic => topic.slug));
+        });
+    }, [])
 
     useEffect(() => {
         getArticles().then( articles => {
             setArticles(articles);
             setIsLoading(false);
         });
-    }, [isLoading]); 
+    }, [isLoading]);
+
+    const filteredArticles = articles.filter( article => 
+        currentTopics === 'all' || article.topic === currentTopics
+    );
 
     // TODO Add spinner component and add to pages
     if (isLoading) return <h2>Loading...</h2>;
@@ -24,7 +35,8 @@ export default function ArticlesList() {
     return (
         <section id='articles-list'>
             <h2>Articles</h2>
-            {articles.map( article => 
+            <TopicsDropDown topics={topics} setCurrentTopics={setCurrentTopics} />
+            {filteredArticles.map( article => 
                 <ArticleItem key={article.article_id} article={article}></ArticleItem>
             )}
         </section>

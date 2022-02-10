@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { getArticleById } from "../utils/api";
+
+import ReviewsList from "../components/ReviewsList";
 
 export default function ArticleDetail() {
   const { article_id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [article, setArticle] = useState();
+  const [loadReviews, setLoadReviews] = useState(false);
 
   useEffect(() => {
     getArticleById(article_id).then(article => {
@@ -15,9 +18,15 @@ export default function ArticleDetail() {
     });
   }, [isLoading]);
 
+  function handleReviewsClick() {
+    setLoadReviews((previousValue, newValue) => {
+      return !previousValue;
+    });
+  }
+
   // TODO Add spinner component and add to pages
   if (isLoading) return <h2>Loading...</h2>;
-  if (!article) return <h2>No Articles Found</h2>;
+  if (!article) return <h2>No Article Found</h2>;
 
   const {
     author,
@@ -42,6 +51,13 @@ export default function ArticleDetail() {
         <li><span className=''>created_at: </span><span>{created_at}</span></li>
         <li><span className=''>votes: </span><span>{votes}</span></li>
         <li><span className=''>comment_count: </span><span>{comment_count}</span></li>
+        {/* <li><Link to={`/articles/${article.article_id}/reviews`}>Reviews</Link></li> */}
+        <li>
+          <button onClick={handleReviewsClick}>
+            {loadReviews ? 'Hide' : 'Show'} {comment_count} Review(s)
+          </button>
+        </li>
+        <li>{loadReviews ? <ReviewsList /> : null}</li>
       </ul>
     </section>);
 }
