@@ -19,8 +19,8 @@ export default function ArticleDetail() {
   }, [isLoading]);
 
   function handleReviewsClick() {
-    setLoadReviews((previousValue, newValue) => {
-      return !previousValue;
+    setLoadReviews( currentValue => {
+      return !currentValue;
     });
   }
 

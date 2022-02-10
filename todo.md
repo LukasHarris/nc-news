@@ -1,17 +1,18 @@
 # TODO
 
 ## Plan
-Sort Articles - date created, comment count and votes
 
 PATCH Vote on an article
 POST new comment on form 
 DELETE own commnets
+User Login Context and Page 
 
 Styling Nav and Lists
 README Links etc.
 
 Optimisitic Render on Vote (Friday Morning)
 Form Validation and Errors
+API Error handling (check requirements)
 
 ## General
 Add spinner component and add to pages

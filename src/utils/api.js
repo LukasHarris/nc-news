@@ -31,6 +31,14 @@ export function getArticleById(article_id) {
     });
 }
 
+export function incrementVote(article_id) {
+  return newsAPI
+    .patch(`/articles/${article_id}`, { inc_votes: 1 } )
+    .then( response => {
+      return response.data.article;
+    });
+}
+
 /*** Reviews aka Comments Endpoint */
 export function getReviews(article_id) {
   return newsAPI

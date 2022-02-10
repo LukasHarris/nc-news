@@ -37,7 +37,7 @@ export default function ArticlesList() {
             <SortByDropDown setCurrentSortBy={setCurrentSortBy} />
             <p>{articles.length}</p>
             {articles.map( article => 
-                <ArticleItem key={article.article_id} article={article}></ArticleItem>
+                <ArticleItem key={article.article_id} article={article} setArticles={setArticles}></ArticleItem>
             )}
         </section>
     );
