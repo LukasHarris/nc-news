@@ -14,9 +14,10 @@ export function getTopics() {
 }
 
 /*** Articles Endpoint */
-export function getArticles() {
+export function getArticles(sortBy = 'created_at', order = 'desc', topic = '') {
+  const urlPath = `/articles?sort_by=${sortBy}&order=${order}&topic=${topic}`;
   return newsAPI
-    .get("/articles")
+    .get(urlPath)
     .then( response => {
       return response.data.articles;
     });
@@ -51,5 +52,5 @@ export function getAuthors() {
       authors[article.author] = article.author;
     });
     return Object.keys(authors);
-  })
+  });
 }

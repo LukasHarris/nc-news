@@ -44,7 +44,7 @@ export default function ArticleDetail() {
       <ul>
         <li><h2>Article Detail</h2></li>
         <li><h3>{title}</h3></li>
-        <li><span className=''>Author: </span><span>{author}</span></li>
+        <li className='text-align-left'><span className=''>Author: </span><span className=''>{author}</span></li>
         <li><span className=''>Auhtor-ID: </span><span>{art_id}</span></li>
         <li><span className=''>Body: </span><span>{body}</span></li>
         <li><span className=''>Topic: </span><span>{topic}</span></li>

@@ -4,29 +4,27 @@ import { getTopics, getArticles } from "../utils/api";
 
 import ArticleItem from "./ArticleItem";
 import TopicsDropDown from "./TopicsDropDown";
+import SortByDropDown from "./SortByDropDown"
 
 export default function ArticlesList() {
     const [isLoading, setIsLoading] = useState(true);
     const [topics, setTopics] = useState([]);
-    const [currentTopics, setCurrentTopics] = useState('all');
+    const [currentTopic, setCurrentTopic] = useState('');
+    const [sortBy, setCurrentSortBy] = useState('created_at');
     const [articles, setArticles] = useState([]);
 
-    useEffect(()=> {
+    useEffect(() => {
         getTopics().then( topics => {
             setTopics(topics.map( topic => topic.slug));
         });
-    }, [])
+    }, []);
 
     useEffect(() => {
-        getArticles().then( articles => {
+        getArticles(sortBy, 'desc', currentTopic).then( articles => {
             setArticles(articles);
             setIsLoading(false);
         });
-    }, [isLoading]);
-
-    const filteredArticles = articles.filter( article => 
-        currentTopics === 'all' || article.topic === currentTopics
-    );
+    }, [isLoading, sortBy, currentTopic]);
 
     // TODO Add spinner component and add to pages
     if (isLoading) return <h2>Loading...</h2>;
@@ -35,8 +33,10 @@ export default function ArticlesList() {
     return (
         <section id='articles-list'>
             <h2>Articles</h2>
-            <TopicsDropDown topics={topics} setCurrentTopics={setCurrentTopics} />
-            {filteredArticles.map( article => 
+            <TopicsDropDown topics={topics} setCurrentTopic={setCurrentTopic} />
+            <SortByDropDown setCurrentSortBy={setCurrentSortBy} />
+            <p>{articles.length}</p>
+            {articles.map( article => 
                 <ArticleItem key={article.article_id} article={article}></ArticleItem>
             )}
         </section>
