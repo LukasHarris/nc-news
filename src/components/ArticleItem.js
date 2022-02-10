@@ -36,8 +36,8 @@ export default function ArticleItem({ article, setArticles }) {
       <h3>{article.title}</h3>
       <p>{article.body}</p>
       <p>
-        Comments&nbsp;{article.comment_count}
-        <Link to='article/:article_id/addComment'>Add Comment</Link>
+        <label>Reviews&nbsp;{article.comment_count}</label>
+        <Link to={`/articles/${article.article_id}/add_review`}>Add Review</Link>
         Votes&nbsp;{article.votes}
         <button onClick={handleUpVoteClick} value={article.article_id}>Up Vote</button>
       </p>

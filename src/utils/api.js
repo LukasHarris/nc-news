@@ -48,6 +48,15 @@ export function getReviews(article_id) {
     });
 }
 
+export function postReview(article_id, newReview) {
+  return newsAPI
+  .post(`/articles/${article_id}/comments`, newReview )
+  .then( response => {
+    console.log('POST Comment ', response)
+    return response.data.comment;
+  });
+}
+
 /*** Authors Endpoint */
 export function getAuthors() {
   // TODO Implement users endpoint within API
