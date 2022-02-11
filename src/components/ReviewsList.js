@@ -15,7 +15,7 @@ export default function ReviewsList() {
           setReviews(reviews);
           setIsLoading(false);
       });
-  }, [isLoading]);
+  }, [isLoading, article_id]);
 
   // TODO Add spinner component and add to pages
   if (isLoading) return <h2>Loading...</h2>;
