@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 
 import { getAuthors } from "../utils/api";
 
+import ErrorsList from './ErrorsList';
 import '../App.css';
 
-import ErrorsList from './ErrorsList';
 
 export default function UserLogin({ setCurrentUser }) {
   const [isLoading, setIsLoading] = useState(true);

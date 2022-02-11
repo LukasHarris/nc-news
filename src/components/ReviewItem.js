@@ -1,6 +1,6 @@
 import { deleteReview } from "../utils/api";
 
-export default function ReviewItem({ review, setReviews }) {
+export default function ReviewItem({ review, setReviews, setErrors, currentUser }) {
 
   function handleDeleteClick(event) {
     const review_id = Number.parseInt(event.target.value);
@@ -12,11 +12,9 @@ export default function ReviewItem({ review, setReviews }) {
             currentReviews
               .filter( review => review.comment_id !== review_id ));
         } else {
-          console.log('DELETED FAILED');
-          // TODO Add Error Message
+          setErrors(currentErrors => [...currentErrors, { message: `Failed to delete review with ${review_id}.`}])
         };
       });
-
   }
 
   return (
@@ -27,12 +25,10 @@ export default function ReviewItem({ review, setReviews }) {
         <li>{review.created_at}</li>
         <li>{review.body}</li>
         {review.comment_id}
-        <li><button onClick={handleDeleteClick} value={review.comment_id}>Delete</button></li>
+        { (currentUser === review.author) 
+        ? <li><button onClick={handleDeleteClick} value={review.comment_id}>Delete</button></li>
+        : null }
       </ul>
     </section>
   );
 }
-
-
-
-

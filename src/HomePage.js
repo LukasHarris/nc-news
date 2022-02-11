@@ -18,8 +18,10 @@ export default function HomePage() {
     <main>
       <h2>Home</h2>
       Welcome to NorthCoders News
-      { (!currentUser) ? <UserLogin setCurrentUser={setCurrentUser} /> : <p>Currently Logged in as {currentUser} <a href="" onClick={handleLogout}>Logout</a></p> }
-      
+      { (!currentUser) 
+      ? <UserLogin setCurrentUser={setCurrentUser} /> 
+      : <p>Currently Logged in as {currentUser} 
+          <a href="" onClick={handleLogout}>Logout</a></p> }
     </main>
   );
 }
