@@ -1,6 +1,6 @@
 :root {
   --red: red;
-  
+
  /* TODO Name correct fonts or Import */
  --mono: monospace;
  --sans: sans-serif;
@@ -21,7 +21,7 @@
 /** NavBar */
 nav {
  font-family: var(--mono);
- font-size: 80%;
+ /* font-size: 80%; */
  padding: 1rem;
  margin: 0;
 }
