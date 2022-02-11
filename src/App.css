@@ -21,7 +21,7 @@
 /** NavBar */
 nav {
  font-family: var(--mono);
- /* font-size: 80%; */
+ /* font-size: 80%; Needs font set-up correctly */
  padding: 1rem;
  margin: 0;
 }
@@ -58,6 +58,12 @@ nav a:hover {
  color: var(--colour3);
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 /** Desktop Breakpoint */
 @media only screen and (min-width: 768px) {
  body {
@@ -69,14 +75,10 @@ nav a:hover {
 }
 
 img {
-
  width: 350px;
  object-fit: cover;
-
 }
 
 .error-message {
-
  color: var(--error-colour);
-
 }
