@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { postReview } from "../utils/api";
 
 export default function AddReview() {
   const { article_id } = useParams();
-//  const [ newComment, setNewComment ] = useState();
-  const [ author, setAuthor ] = useState();
-  const [ body, setBody ] = useState();
-
+  const [ author, setAuthor ] = useState('');
+  const [ body, setBody ] = useState('');
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => { 
@@ -28,13 +27,11 @@ export default function AddReview() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log('Sbmitted Form ', { username: author, body} );
-
-    postReview(article_id, { author, body}).then( review => { 
-      console.log('POSTED comment', review);
-      
-    }).catch( err => console.log("ERRRROOOOOOORRRRRRR", err))
-
+    postReview(article_id, { author, body, votes: 0, created_at: (new Date()).toISOString() } )
+      .then( review => { 
+        navigate(`/articles/${article_id}`)
+      })
+      .catch( err => console.log("ERRRROOOOOOORRRRRRR", err));
   }
   
   // TODO Add spinner component and add to pages

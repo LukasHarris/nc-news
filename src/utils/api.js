@@ -50,11 +50,18 @@ export function getReviews(article_id) {
 
 export function postReview(article_id, newReview) {
   return newsAPI
-  .post(`/articles/${article_id}/comments`, newReview )
-  .then( response => {
-    console.log('POST Comment ', response)
-    return response.data.comment;
-  });
+    .post(`/articles/${article_id}/comments`, newReview )
+    .then( response => {
+      return { status: response.status, statusText: response.statusText };
+    });
+}
+
+export function deleteReview(review_id) {
+  return newsAPI
+    .delete(`/comments/${review_id}`)
+    .then( response => {
+      return { status: response.status, statusText: response.statusText };
+    });
 }
 
 /*** Authors Endpoint */

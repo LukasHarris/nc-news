@@ -24,6 +24,6 @@ export default function ReviewsList() {
   return (
       <section id='reviews-list'>
           <h2>Reviews</h2>
-          {reviews.map( review => <ReviewItem key={review.comment_id} review={review} />)}
+          {reviews.map( review => <ReviewItem key={review.comment_id} review={review} setReviews={setReviews} />)}
       </section>);
 }

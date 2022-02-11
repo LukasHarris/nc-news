@@ -5,9 +5,7 @@ export default function Nav () {
         <>
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/articles'>Articles</NavLink></li>
-            <li><NavLink to='/reviews'>Reviews</NavLink></li>
             <li><NavLink to='/authors'>Authors</NavLink></li>
-
         </>
     );
 }
