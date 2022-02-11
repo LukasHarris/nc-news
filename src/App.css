@@ -1,19 +1,82 @@
 :root {
   --red: red;
-}
+  
+ /* TODO Name correct fonts or Import */
+ --mono: monospace;
+ --sans: sans-serif;
+
+ --colour1: #64BCF0;
+ --colour2: #5EF7DB;
+ --colour3: #60E07E;
+ --colour4: #A0F75E;
+ --colour5: #EDE75A;
+
+ --error-colour: red;
+}  
 
 .App {
-  text-align: center;
+ text-align: center;
 }
 
-.my-label {
-  color: var(--red);
+/** NavBar */
+nav {
+ font-family: var(--mono);
+ font-size: 80%;
+ padding: 1rem;
+ margin: 0;
 }
 
-.text-align-left {
-  text-align: left;
+nav h1 a {
+ font-family: var(--sans);
 }
 
-.text-align-right {
-  text-align: right;
+nav ul {
+ list-style-type: none;
+ padding: 0;
+ margin: 0;
+ display: flex;
+ flex-flow: row wrap;
+ justify-content: center;
+ align-items: center;
+ gap: 2rem;
+}
+
+/* Remove style for desktop > 768px*/
+nav li:first-child {
+ flex-basis: 100%;
+ text-align: center;
+ /* border: 1px solid var(--error-colour); */
+}
+
+nav a {
+ color: var(--colour1);
+ text-decoration: none;
+ display: block;
+}
+
+nav a:hover {
+ color: var(--colour3);
+}
+
+/** Desktop Breakpoint */
+@media only screen and (min-width: 768px) {
+ body {
+   background-color: var(--colour5);
+ }
+ nav li:first-child {
+     flex-basis: 20%;
+ }
+}
+
+img {
+
+ width: 350px;
+ object-fit: cover;
+
+}
+
+.error-message {
+
+ color: var(--error-colour);
+
 }
