@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const newsAPI = axios.create({
-  baseURL: "https://be-lh-news.herokuapp.com/api",
+  baseURL: "https://be-lh-news.onrender.com/api",
 });
 
 /*** Topics Endpoint */

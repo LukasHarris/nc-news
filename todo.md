@@ -3,7 +3,7 @@
 ## Plan
 POST new comment on form Validate form field and fill in user 
 
-CORS see Notes (where thou?)
+CORS see Notes (done in basic form on API server)
 DELETE own commnets
 User Login Context and Page
 

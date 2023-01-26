@@ -11,7 +11,7 @@
  --colour4: #A0F75E;
  --colour5: #EDE75A;
 
- --error-colour: red;
+ --error-colour: var(--red);
 }  
 
 .App {
@@ -75,10 +75,10 @@ ul {
 }
 
 img {
- width: 350px;
- object-fit: cover;
+  width: 350px;
+  object-fit: cover;
 }
 
 .error-message {
- color: var(--error-colour);
+  color: var(--error-colour);
 }
