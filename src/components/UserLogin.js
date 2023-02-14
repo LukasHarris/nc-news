@@ -5,7 +5,6 @@ import { getAuthors } from "../utils/api";
 import ErrorsList from './ErrorsList';
 import '../App.css';
 
-
 export default function UserLogin({ setCurrentUser }) {
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState();

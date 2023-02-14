@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { UserContext } from '../contexts/user.context';
+import UserContext from '../contexts/user.context';
 import { getReviews } from "../utils/api";
 
 import ReviewItem from '../components/ReviewItem';
@@ -14,7 +14,7 @@ export default function ReviewsList() {
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
   const [errors, setErrors] = useState([]);
-  const { currentUser } = useContext(UserContext);
+  const [ currentUser, _ ] = useContext(UserContext);
 
   useEffect(() => {
     getReviews(article_id).then( reviews => {

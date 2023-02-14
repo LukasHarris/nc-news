@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { UserContext } from './contexts/user.context';
+import UserContext from './contexts/user.context';
 
 import PageNotFound from "./components/PageNotFound";
 import HeaderNav from "./components/HeaderNav";
@@ -16,12 +16,12 @@ import AuthorsList from "./components/AuthorsList";
 import "./App.css";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
+  const userHook = useState(null);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <UserContext.Provider value={{ currentUser, setCurrentUser }} >
+        <UserContext.Provider value={userHook} >
           <HeaderNav />
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
