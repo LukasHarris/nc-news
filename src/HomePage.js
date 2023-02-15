@@ -23,7 +23,7 @@ export default function HomePage() {
         <UserLogin setCurrentUser={setCurrentUser} />
       ) : (
         <p>
-          Currently Logged in as {currentUser}
+          Currently Logged in as {currentUser.name}
           <Link to="/" onClick={handleLogout}>
             Logout
           </Link>

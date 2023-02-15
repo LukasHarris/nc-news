@@ -78,3 +78,31 @@ export function getAuthors() {
     return Object.keys(authors);
   });
 }
+
+/*** Users Endpoint */
+export function getUsers() {
+  const urlPath = `/users`;
+  return newsAPI
+    .get(urlPath)
+    .then( response => {
+      console.log(response)
+      return response.data.users;
+    });
+}
+
+export function getUserById(username) {
+  return newsAPI
+    .get(`/users/${username}`)
+    .then( response => {
+      return response.data.user;
+    });
+}
+
+/* Not implemented yet
+export function postUser(newUser) {
+  return newsAPI
+    .post(`/users`, newUser )
+    .then( response => {
+      return { status: response.status, statusText: response.statusText };
+    });
+}*/

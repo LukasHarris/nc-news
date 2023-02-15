@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getAuthors } from "../utils/api";
+import { getUsers } from "../utils/api";
 
 import ErrorsList from './ErrorsList';
 import '../App.css';
@@ -13,7 +13,7 @@ export default function UserLogin({ setCurrentUser }) {
   
   useEffect(() => {
     // Users with API not implemented so faked it with author names aka usernames.
-    getAuthors().then( users => { 
+    getUsers().then( users => {
       setUsers(users);
       setIsLoading(false);
     });
@@ -26,9 +26,9 @@ export default function UserLogin({ setCurrentUser }) {
 
   function handleLoginSubmit(event) {
     event.preventDefault();
-
-    if (users.find( user => user === inputUsername )) {
-      setCurrentUser(inputUsername);
+    const currentUser = users.find( user => user.username === inputUsername );
+    if (currentUser) {
+      setCurrentUser(currentUser);
       setErrors([]);
     } else {
       setErrors( currentErrors => [ { message: 'User name not found, please try again.' } ]);
