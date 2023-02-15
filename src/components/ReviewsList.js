@@ -14,7 +14,7 @@ export default function ReviewsList() {
   const [isLoading, setIsLoading] = useState(true);
   const [reviews, setReviews] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [ currentUser, _ ] = useContext(UserContext);
+  const [ currentUser ] = useContext(UserContext);
 
   useEffect(() => {
     getReviews(article_id).then( reviews => {
