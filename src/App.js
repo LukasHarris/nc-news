@@ -16,11 +16,17 @@ import AuthorsList from "./components/AuthorsList";
 // CSS Styling
 //import "./App.css";
 
+// Tailwind Styling
+import "./styles.css"
+
 function App() {
   const userHook = useState(null);
 
   return (
-    <div className="App">
+    <div className="p-0 m-0 text-2xl text-blue-700"
+    style={{
+      background: "url(http://some-website.com/public/wallpaper.jpg)",
+    }}>
       <BrowserRouter>
         <UserContext.Provider value={userHook} >
           <HeaderNav />
