@@ -7,7 +7,7 @@ import { getReviews } from "../utils/api";
 import ReviewItem from '../components/ReviewItem';
 import ErrorsList from '../components/ErrorsList';
 
-import '../App.css';
+//import '../App.css';
 
 export default function ReviewsList() {
   const { article_id } = useParams();
