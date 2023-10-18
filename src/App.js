@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import UserContext from './contexts/user.context';
@@ -19,16 +19,33 @@ import AuthorsList from "./components/AuthorsList";
 // Tailwind Styling
 import "./styles.css"
 
+// Persist local User
+let initialUser;
+try {
+  initialUser = JSON.parse(localStorage.getItem("userctx")) ?? null;
+} 
+catch {
+  console.error("Unable to parse user from storage into JSON.");
+  initialUser = null;
+}
+
 function App() {
-  const userHook = useState(null);
+  const [currentUser, setCurrentUser] = useState(initialUser);
+
+  useEffect( () => {
+    if (currentUser) {
+      localStorage.setItem("userctx", JSON.stringify(currentUser));
+    }
+  }, [currentUser]);
 
   return (
-    <div className="p-0 m-0 text-2xl text-blue-700"
-    style={{
-      background: "url(http://some-website.com/public/wallpaper.jpg)",
-    }}>
+    <div className="container p-0 m-0 text-2xl text-blue-700 bg-amber-300"
+    // style={{
+    //   background: "url(http://some-website.com/public/wallpaper.jpg)",
+    // }}
+    >
       <BrowserRouter>
-        <UserContext.Provider value={userHook} >
+        <UserContext.Provider value={{currentUser, setCurrentUser}} >
           <HeaderNav />
           <Routes>
             <Route path="/" element={<HomePage />}></Route>

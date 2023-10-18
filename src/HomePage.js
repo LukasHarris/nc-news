@@ -8,7 +8,7 @@ import UserLogin from "./components/UserLogin";
 //import "./App.css";
 
 export default function HomePage() {
-  const [currentUser, setCurrentUser] = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
   function handleLogout(event) {
     event.preventDefault();
@@ -18,16 +18,14 @@ export default function HomePage() {
   return (
     <main>
       <h2>Home</h2>
-      Welcome to NorthCoders News
+      <h1>Welcome to NorthCoders News</h1>
       {!currentUser ? (
-        <UserLogin setCurrentUser={setCurrentUser} />
+        <UserLogin currentUser={currentUser} setCurrentUser={setCurrentUser} />
       ) : (
-        <p>
-          Currently Logged in as {currentUser.name}
-          <Link to="/" onClick={handleLogout}>
-            Logout
-          </Link>
-        </p>
+        <div className=""> 
+        <p>Currently Logged in as {currentUser.name}</p>
+          <Link to="/" onClick={handleLogout}>Logout</Link>
+        </div>
       )}
     </main>
   );

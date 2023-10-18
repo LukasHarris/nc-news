@@ -1,13 +1,13 @@
 import axios from "axios";
 
 const newsAPI = axios.create({
-  baseURL: "https://be-lh-news.onrender.com/api",
+  baseURL: "https://be-lh-news.onrender.com",
 });
 
 /*** Topics Endpoint */
 export function getTopics() {
   return newsAPI
-    .get("/topics")
+    .get("/api/topics")
     .then( response => {
       return response.data.topics;
     });
@@ -15,7 +15,7 @@ export function getTopics() {
 
 /*** Articles Endpoint */
 export function getArticles(sortBy = 'created_at', order = 'desc', topic = '') {
-  const urlPath = `/articles?sort_by=${sortBy}&order=${order}&topic=${topic}`;
+  const urlPath = `/api/articles?sort_by=${sortBy}&order=${order}&topic=${topic}`;
   return newsAPI
     .get(urlPath)
     .then( response => {
@@ -25,7 +25,7 @@ export function getArticles(sortBy = 'created_at', order = 'desc', topic = '') {
 
 export function getArticleById(article_id) {
   return newsAPI
-    .get(`/articles/${article_id}`)
+    .get(`/api/articles/${article_id}`)
     .then( response => {
       return response.data.article;
     });
@@ -33,7 +33,7 @@ export function getArticleById(article_id) {
 
 export function incrementVote(article_id) {
   return newsAPI
-    .patch(`/articles/${article_id}`, { inc_votes: 1 } )
+    .patch(`/api/articles/${article_id}`, { inc_votes: 1 } )
     .then( response => {
       return response.data.article;
     });
@@ -42,7 +42,7 @@ export function incrementVote(article_id) {
 /*** Reviews aka Comments Endpoint */
 export function getReviews(article_id) {
   return newsAPI
-    .get(`/articles/${article_id}/comments`)
+    .get(`/api/articles/${article_id}/comments`)
     .then( response => {
       return response.data.comments;
     });
@@ -50,7 +50,7 @@ export function getReviews(article_id) {
 
 export function postReview(article_id, newReview) {
   return newsAPI
-    .post(`/articles/${article_id}/comments`, newReview )
+    .post(`/api/articles/${article_id}/comments`, newReview )
     .then( response => {
       return { status: response.status, statusText: response.statusText };
     });
@@ -58,7 +58,7 @@ export function postReview(article_id, newReview) {
 
 export function deleteReview(review_id) {
   return newsAPI
-    .delete(`/comments/${review_id}`)
+    .delete(`/api/comments/${review_id}`)
     .then( response => {
       return { status: response.status, statusText: response.statusText };
     });
@@ -81,7 +81,7 @@ export function getAuthors() {
 
 /*** Users Endpoint */
 export function getUsers() {
-  const urlPath = `/users`;
+  const urlPath = `/api/users`;
   return newsAPI
     .get(urlPath)
     .then( response => {
@@ -90,13 +90,21 @@ export function getUsers() {
     });
 }
 
-export function getUserById(username) {
+export function getUserById(userToken) {
   return newsAPI
-    .get(`/users/${username}`)
+    .get(`/api/users/${userToken.username}`, { headers: { Authorization: `Bearer ${userToken.token}`}})
     .then( response => {
       return response.data.user;
     });
 }
+
+export function signIn(username) {
+  return newsAPI
+    .post(`/auth/signin`, username )
+    .then( response => {
+      return response.data.token;
+    });
+  }
 
 /* Not implemented yet
 export function postUser(newUser) {

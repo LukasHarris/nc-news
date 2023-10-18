@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
 
-import { getUsers } from "../utils/api";
+import { signIn, getUserById } from "../utils/api";
 
 import ErrorsList from './ErrorsList';
 //import '../App.css';
 
-export default function UserLogin({ setCurrentUser }) {
+export default function UserLogin({ currentUser, setCurrentUser }) {
   const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState();
+//  const [users, setUsers] = useState();
   const [inputUsername, setInputUsername] = useState('');
   const [errors, setErrors] = useState([]);
   
   useEffect(() => {
-    // Users with API not implemented so faked it with author names aka usernames.
-    getUsers().then( users => {
-      setUsers(users);
       setIsLoading(false);
-    });
   }, []);
 
   function handleLoginChange(event) {
@@ -26,9 +22,22 @@ export default function UserLogin({ setCurrentUser }) {
 
   function handleLoginSubmit(event) {
     event.preventDefault();
-    const currentUser = users.find( user => user.username === inputUsername );
+    // TBD Refactor side effect on currentUser?
+    signIn({
+      "username": inputUsername,
+      "password": "pa5$word" // Default Password
+    }).then( token => {
+      return token;
+    }).then( token => {
+      getUserById({ 
+        username: inputUsername,
+        token 
+      }).then((user) => {
+        setCurrentUser({ ...user, token });
+      });
+    });
+    
     if (currentUser) {
-      setCurrentUser(currentUser);
       setErrors([]);
     } else {
       setErrors( currentErrors => [ { message: 'User name not found, please try again.' } ]);
